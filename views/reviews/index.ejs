@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reviews</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+
+<body>
+    <%- include('../partials/_navbar.ejs') %>
+        <h1>Reviews</h1>
+        <a href="/reviews/<%= user%>/<%= book%>/new">
+            <button class="button-margin">Add Review</button>
+          </a>
+        <% if (reviews.length > 0) { %>
+            <ul class="reviews-list">
+                <% reviews.forEach(review => { %>
+                  <li class="review-item">
+                    <h3 class="review-owner"><%= review.owner.username %></h3>
+                    <p class="review-description"><%= review.description %></p>
+                    
+                    <% if (user == review.owner._id) { %>
+                      <div class="review-actions">
+                        <a href="/reviews/<%= review._id %>/edit">
+                          <button type="button">Edit Review</button>
+                        </a>
+                        <form action="/reviews/<%= review._id %>?_method=DELETE" method="POST" style="display: inline;">
+                          <button type="submit">Delete</button>
+                        </form>
+                      </div>
+                    <% } %>
+                  </li>
+                <% }); %>
+              </ul>
+          <% } else { %>
+            <p>No Reviews listed.</p>
+          <% } %>
+                    
+</body>
+
+</html>

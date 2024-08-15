@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title<></title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+
+<body>
+  <%- include('../partials/_navbar.ejs') %>
+  <h1>Welcome to Bookclub</h1>
+  <a href="/users/<%= user._id %>/books/new">
+    <button class="button-margin">Add New Book</button>
+  </a>
+  <% if(books.length) { %>
+    <ul>
+      <% books.forEach((book) => { %>
+        <li>
+          <div class="book-item">
+            <p><strong>Title:</strong> <%= book.title %></p>
+            <p><strong>Author:</strong> <%= book.author %></p>
+            <p><strong>Genre:</strong> <%= book.genre %></p>
+            <a href="/reviews/<%= user._id %>/<%= book._id %>">
+              <button>Go to Reviews</button>
+            </a>
+          </div>
+        </li>
+      <% }) %>
+    </ul>
+  <% } else { %>
+    <p>There are no books in the Bookclub.</p>
+  <% } %>
+</body>
+</html>
